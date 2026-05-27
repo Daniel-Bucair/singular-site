@@ -44,6 +44,7 @@
         <li><a href="#glossario" class="nav-link">Glossário</a></li>
         <li><a href="#quiz" class="nav-link">Diagnóstico</a></li>
         <li><a href="#planos" class="nav-link">Planos</a></li>
+        <li><a href="#ebook" class="nav-link">Ebook</a></li>
         <li><a href="#faq" class="nav-link">FAQ</a></li>
         <li><a href="#contato" class="nav-link nav-link-cta">Contato</a></li>
       </ul>
@@ -308,7 +309,7 @@
           </div>
         </article>
 
-        <article class="glossario-card reveal">
+        <article class="glossario-card glossario-card--extra">
           <div class="glossario-header">
             <span class="glossario-tag">Trigonometria</span>
             <h3 class="glossario-term">Razões Trigonométricas</h3>
@@ -321,7 +322,7 @@
           </div>
         </article>
 
-        <article class="glossario-card reveal">
+        <article class="glossario-card glossario-card--extra">
           <div class="glossario-header">
             <span class="glossario-tag">Estatística</span>
             <h3 class="glossario-term">Média, Mediana e Moda</h3>
@@ -334,7 +335,7 @@
           </div>
         </article>
 
-        <article class="glossario-card reveal">
+        <article class="glossario-card glossario-card--extra">
           <div class="glossario-header">
             <span class="glossario-tag">Álgebra</span>
             <h3 class="glossario-term">Logaritmo</h3>
@@ -347,7 +348,7 @@
           </div>
         </article>
 
-        <article class="glossario-card reveal">
+        <article class="glossario-card glossario-card--extra">
           <div class="glossario-header">
             <span class="glossario-tag">Combinatória</span>
             <h3 class="glossario-term">Análise Combinatória</h3>
@@ -360,7 +361,7 @@
           </div>
         </article>
 
-        <article class="glossario-card reveal">
+        <article class="glossario-card glossario-card--extra">
           <div class="glossario-header">
             <span class="glossario-tag">Geometria</span>
             <h3 class="glossario-term">Geometria Espacial</h3>
@@ -373,7 +374,7 @@
           </div>
         </article>
 
-        <article class="glossario-card reveal">
+        <article class="glossario-card glossario-card--extra">
           <div class="glossario-header">
             <span class="glossario-tag">Probabilidade</span>
             <h3 class="glossario-term">Probabilidade</h3>
@@ -386,7 +387,7 @@
           </div>
         </article>
 
-        <article class="glossario-card reveal">
+        <article class="glossario-card glossario-card--extra">
           <div class="glossario-header">
             <span class="glossario-tag">Geometria</span>
             <h3 class="glossario-term">Geometria Analítica</h3>
@@ -400,6 +401,16 @@
         </article>
 
       </div>
+
+      <div class="glossario-expand">
+        <button class="btn btn-outline" id="glossarioExpandBtn">
+          <span class="expand-text">Ver todos os termos</span>
+          <svg class="expand-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 6L8 11L13 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
     </div>
   </section>
 
@@ -548,6 +559,75 @@
           </ul>
           <a href="#contato" class="btn btn-outline btn-full">Quero o plano semestral</a>
         </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EBOOK ===== -->
+  <section id="ebook" class="section-dark">
+    <div class="container">
+      <div class="ebook-layout">
+
+        <!-- Capa do livro (mockup) -->
+        <div class="ebook-visual reveal">
+          <div class="ebook-book">
+            <div class="ebook-book-spine"></div>
+            <div class="ebook-book-face">
+              <div class="ebook-book-inner">
+                <div class="ebook-book-logo">
+                  <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+                    <defs>
+                      <linearGradient id="ebookLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#C084FC"/>
+                        <stop offset="100%" stop-color="#38BDF8"/>
+                      </linearGradient>
+                    </defs>
+                    <circle cx="22" cy="22" r="22" fill="url(#ebookLogoGrad)" fill-opacity="0.15"/>
+                    <path d="M15 18C15 15.2386 17.2386 13 20 13H24C26.2091 13 28 14.7909 28 17C28 19.2091 26.2091 21 24 21H20C17.7909 21 16 22.7909 16 25C16 27.2091 17.7909 29 20 29H24C26.7614 29 29 26.7614 29 24" stroke="url(#ebookLogoGrad)" stroke-width="2.4" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <span class="ebook-book-tag">Singular · Ebook</span>
+                <h3 class="ebook-book-title">Título do<br/>Ebook<br/>Aqui</h3>
+                <div class="ebook-book-stripe"></div>
+              </div>
+            </div>
+          </div>
+          <div class="ebook-float-tag ebook-float-1"><span>PDF</span></div>
+          <div class="ebook-float-tag ebook-float-2"><span>Completo</span></div>
+        </div>
+
+        <!-- Informações do ebook -->
+        <div class="ebook-info reveal">
+          <span class="section-tag">Produto Digital</span>
+          <h2 class="ebook-heading">
+            O guia definitivo de<br/>
+            <span class="gradient-text">matemática</span> para vestibular
+          </h2>
+          <p class="ebook-desc">
+            Descrição do ebook — edite com o conteúdo real: sobre o que o material fala, para quem é indicado e quais resultados o aluno pode esperar ao estudar com ele.
+          </p>
+
+          <ul class="ebook-features">
+            <li><span class="ebook-feature-icon">✦</span> Todos os temas do ENEM e principais vestibulares</li>
+            <li><span class="ebook-feature-icon">✦</span> Exercícios resolvidos com explicações detalhadas</li>
+            <li><span class="ebook-feature-icon">✦</span> Resumos e fórmulas essenciais por tema</li>
+            <li><span class="ebook-feature-icon">✦</span> Acesso vitalício em PDF — estude no seu ritmo</li>
+          </ul>
+
+          <div class="ebook-purchase">
+            <div class="ebook-price-wrap">
+              <span class="ebook-price gradient-text">R$ —</span>
+              <span class="ebook-price-note">Pagamento único · Acesso vitalício</span>
+            </div>
+            <a href="#" class="btn btn-primary">
+              Adquirir Ebook
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
 
       </div>
     </div>

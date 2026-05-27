@@ -191,6 +191,35 @@
   }
 
   /* ----------------------------------------------------------
+     GLOSSÁRIO — expandir / colapsar
+  ---------------------------------------------------------- */
+  const glossarioExpandBtn = document.getElementById('glossarioExpandBtn');
+  const extraCards = document.querySelectorAll('.glossario-card--extra');
+
+  if (glossarioExpandBtn && extraCards.length) {
+    glossarioExpandBtn.addEventListener('click', () => {
+      const isExpanded = glossarioExpandBtn.classList.contains('expanded');
+
+      if (isExpanded) {
+        extraCards.forEach(card => {
+          card.style.animationDelay = '';
+          card.classList.remove('show');
+        });
+        glossarioExpandBtn.classList.remove('expanded');
+        glossarioExpandBtn.querySelector('.expand-text').textContent = 'Ver todos os termos';
+        document.getElementById('glossario').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        extraCards.forEach((card, i) => {
+          card.style.animationDelay = `${i * 70}ms`;
+          card.classList.add('show');
+        });
+        glossarioExpandBtn.classList.add('expanded');
+        glossarioExpandBtn.querySelector('.expand-text').textContent = 'Ver menos';
+      }
+    });
+  }
+
+  /* ----------------------------------------------------------
      FAQ ACCORDION
   ---------------------------------------------------------- */
   const faqBtns = document.querySelectorAll('.faq-btn');

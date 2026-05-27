@@ -744,6 +744,36 @@ section { padding: 108px 0; }
   margin-top: 1px;
 }
 
+/* Cards extras — ocultos por padrão */
+.glossario-card--extra {
+  display: none;
+}
+
+.glossario-card--extra.show {
+  display: flex;
+  animation: cardReveal 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes cardReveal {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Botão expandir */
+.glossario-expand {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.expand-chevron {
+  transition: transform var(--transition);
+}
+
+#glossarioExpandBtn.expanded .expand-chevron {
+  transform: rotate(180deg);
+}
+
 /* ============================================================
    PLANOS
    ============================================================ */
@@ -1601,8 +1631,228 @@ section { padding: 108px 0; }
 .wa-float:hover::before { opacity: 1; }
 
 /* ============================================================
+   EBOOK
+   ============================================================ */
+.ebook-layout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.ebook-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 40px 32px 24px;
+}
+
+/* Mockup do livro 3D */
+.ebook-book {
+  display: flex;
+  width: 210px;
+  height: 290px;
+  filter: drop-shadow(0 28px 56px rgba(168, 85, 247, 0.4))
+          drop-shadow(0 8px 24px rgba(0, 0, 0, 0.5));
+  transform: perspective(900px) rotateY(-14deg);
+  transition: transform var(--transition-slow);
+}
+
+.ebook-book:hover {
+  transform: perspective(900px) rotateY(-6deg);
+}
+
+.ebook-book-spine {
+  width: 26px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, #7E22CE 0%, #4F46E5 55%, #1D4ED8 100%);
+  border-radius: 5px 0 0 5px;
+  box-shadow: inset -3px 0 8px rgba(0,0,0,0.35);
+}
+
+.ebook-book-face {
+  flex: 1;
+  background: linear-gradient(145deg, #1C1C32 0%, #12122A 45%, #0C1A3A 100%);
+  border-radius: 0 8px 8px 0;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(168, 85, 247, 0.28);
+  border-left: none;
+}
+
+.ebook-book-face::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, rgba(192, 132, 252, 0.1) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.ebook-book-face::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(192, 132, 252, 0.5), transparent);
+}
+
+.ebook-book-inner {
+  padding: 26px 22px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.ebook-book-logo { display: flex; align-items: center; }
+
+.ebook-book-tag {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(192, 132, 252, 0.65);
+  margin-top: 4px;
+}
+
+.ebook-book-title {
+  font-family: var(--font-heading);
+  font-size: 1.22rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #F0F0FF;
+  margin-top: auto;
+}
+
+.ebook-book-stripe {
+  width: 36px;
+  height: 3px;
+  background: var(--gradient-main);
+  border-radius: 2px;
+  margin-top: 6px;
+}
+
+/* Tags flutuantes */
+.ebook-float-tag {
+  position: absolute;
+  background: var(--bg-card);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-pill);
+  padding: 5px 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--purple);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  box-shadow: var(--shadow-card);
+}
+
+.ebook-float-1 {
+  top: 14px;
+  right: 14px;
+  animation: floatTag 3s ease-in-out infinite;
+}
+
+.ebook-float-2 {
+  bottom: 44px;
+  right: 4px;
+  animation: floatTag 3s ease-in-out infinite 1.5s;
+}
+
+@keyframes floatTag {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-7px); }
+}
+
+/* Coluna de informações */
+.ebook-info {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.ebook-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+}
+
+.ebook-desc {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.8;
+  max-width: 500px;
+}
+
+.ebook-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.ebook-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.96rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.ebook-feature-icon {
+  color: var(--purple);
+  font-size: 0.75rem;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.ebook-purchase {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding-top: 6px;
+  flex-wrap: wrap;
+}
+
+.ebook-price-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ebook-price {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.ebook-price-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ============================================================
    RESPONSIVE ADDITIONS
    ============================================================ */
+@media (max-width: 960px) {
+  .ebook-layout {
+    grid-template-columns: 1fr;
+    gap: 52px;
+  }
+
+  .ebook-visual { justify-content: center; }
+}
+
 @media (max-width: 768px) {
   .quiz-options-grid { grid-template-columns: 1fr; }
   .quiz-panel { padding: 36px 28px; }
@@ -1614,4 +1864,9 @@ section { padding: 108px 0; }
   .wa-float { bottom: 20px; right: 20px; width: 52px; height: 52px; }
   .wa-float::before { display: none; }
   .quiz-result-actions { flex-direction: column; align-items: stretch; }
+
+  .ebook-book { width: 170px; height: 235px; }
+  .ebook-book-title { font-size: 1rem; }
+
+  .ebook-purchase { flex-direction: column; align-items: flex-start; gap: 16px; }
 }

@@ -1079,6 +1079,87 @@ section { padding: 108px 0; }
 }
 
 /* ============================================================
+   SECTION COLOR DIFFERENTIATION
+   — Cada seção tem um tint sutil e borda-topo da paleta do site
+   ============================================================ */
+
+.section-tag-indigo {
+  border-color: rgba(129, 140, 248, 0.3);
+  background: rgba(129, 140, 248, 0.07);
+  color: var(--indigo);
+}
+
+.section-tag-sky {
+  border-color: rgba(56, 189, 248, 0.3);
+  background: rgba(56, 189, 248, 0.07);
+  color: var(--sky);
+}
+
+/* Diferenciais — roxo */
+#diferenciais {
+  background: linear-gradient(180deg, rgba(168, 85, 247, 0.06) 0%, rgba(168, 85, 247, 0.015) 100%),
+              var(--bg-secondary);
+  border-top: 1px solid rgba(168, 85, 247, 0.25);
+}
+
+/* Quem Somos — índigo */
+#quem-somos {
+  background: linear-gradient(180deg, rgba(129, 140, 248, 0.06) 0%, rgba(129, 140, 248, 0.012) 100%),
+              var(--bg-primary);
+  border-top: 1px solid rgba(129, 140, 248, 0.25);
+}
+
+/* Glossário — azul-céu */
+#glossario {
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.06) 0%, rgba(56, 189, 248, 0.012) 100%),
+              var(--bg-secondary);
+  border-top: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+/* Quiz — roxo (mais profundo) */
+#quiz {
+  background: linear-gradient(180deg, rgba(168, 85, 247, 0.05) 0%, rgba(168, 85, 247, 0.01) 100%),
+              var(--bg-primary);
+  border-top: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+/* Planos — índigo */
+#planos {
+  background: linear-gradient(180deg, rgba(129, 140, 248, 0.06) 0%, rgba(129, 140, 248, 0.012) 100%),
+              var(--bg-secondary);
+  border-top: 1px solid rgba(129, 140, 248, 0.25);
+}
+
+/* Ebook — azul-céu */
+#ebook {
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.05) 0%, rgba(56, 189, 248, 0.01) 100%),
+              var(--bg-primary);
+  border-top: 1px solid rgba(56, 189, 248, 0.22);
+}
+
+/* FAQ — roxo */
+#faq {
+  background: linear-gradient(180deg, rgba(168, 85, 247, 0.045) 0%, rgba(168, 85, 247, 0.008) 100%),
+              var(--bg-primary);
+  border-top: 1px solid rgba(168, 85, 247, 0.18);
+}
+
+/* Contato — índigo */
+#contato {
+  background: linear-gradient(180deg, rgba(129, 140, 248, 0.05) 0%, rgba(129, 140, 248, 0.01) 100%),
+              var(--bg-primary);
+  border-top: 1px solid rgba(129, 140, 248, 0.22);
+}
+
+/* Mobile: bordas-topo mais espessas para separação mais clara */
+@media (max-width: 768px) {
+  #diferenciais, #quem-somos, #glossario, #quiz,
+  #planos, #ebook, #faq, #contato {
+    border-top-width: 2px;
+  }
+}
+
+/* ============================================================
    FOOTER
    ============================================================ */
 .footer {

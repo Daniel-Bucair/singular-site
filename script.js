@@ -270,6 +270,11 @@
       options: ['1', '2', '10', '100'],
       correct: 1
     },
+   
+   
+
+
+
     {
       q: 'Qual é a área de um círculo de raio 5? (use π ≈ 3,14)',
       options: ['15,7', '31,4', '78,5', '157'],
@@ -279,6 +284,7 @@
       q: 'Uma PG tem primeiro termo 3 e razão 2. Qual é o 4º termo?',
       options: ['12', '18', '24', '48'],
       correct: 2
+    
     },
     {
       q: 'Quantos arranjos de 3 elementos existem em um conjunto de 5?',
@@ -412,5 +418,166 @@
   if (quizRetryBtn) {
     quizRetryBtn.addEventListener('click', resetQuiz);
   }
+
+  /* ----------------------------------------------------------
+     HERO — AWWWARDS-STYLE ENTRANCE ANIMATIONS
+  ---------------------------------------------------------- */
+
+  // ── 1. Título: word-by-word slide-up reveal ────────────────
+  (function splitHeroTitle() {
+    const title = document.querySelector('.hero-title');
+    if (!title) return;
+
+    const nodes = [...title.childNodes];
+    title.innerHTML = '';
+    let wordIdx = 0;
+
+    function wrapWord(text, delay) {
+      const outer = document.createElement('span');
+      outer.className = 'word-outer';
+      const inner = document.createElement('span');
+      inner.className = 'word-inner';
+      inner.style.animation = `wordSlideUp 0.78s cubic-bezier(0.16,1,0.3,1) ${delay}s both`;
+      inner.textContent = text;
+      outer.appendChild(inner);
+      return outer;
+    }
+
+    nodes.forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const words = node.textContent.replace(/\n\s*/g, ' ').trim().split(' ').filter(Boolean);
+        if (!words.length) return;
+        words.forEach(word => {
+          if (title.lastChild && title.lastChild.nodeName !== 'BR') {
+            title.appendChild(document.createTextNode(' '));
+          }
+          title.appendChild(wrapWord(word, 0.28 + wordIdx++ * 0.09));
+        });
+      } else if (node.nodeName === 'BR') {
+        title.appendChild(node.cloneNode());
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        if (title.lastChild && title.lastChild.nodeName !== 'BR') {
+          title.appendChild(document.createTextNode(' '));
+        }
+        const outer = document.createElement('span');
+        outer.className = 'word-outer';
+        const inner = node.cloneNode(true);
+        const delay = 0.28 + wordIdx++ * 0.09;
+        const isGrad = inner.classList.contains('gradient-text');
+        const anim   = `wordSlideUp 0.78s cubic-bezier(0.16,1,0.3,1) ${delay}s both` +
+                       (isGrad ? `, heroGradShimmer 5s linear infinite ${delay + 1.2}s` : '');
+        inner.style.display = 'inline-block';
+        inner.style.animation = anim;
+        if (isGrad) {
+          inner.style.backgroundImage = 'linear-gradient(90deg,#D8B4FE,#A5B4FC,#7DD3FC,#C4B5FD,#D8B4FE)';
+          inner.style.backgroundSize  = '300% 100%';
+        }
+        outer.appendChild(inner);
+        title.appendChild(outer);
+      }
+    });
+
+    // Revela o título logo após o split (evita FOUC)
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      title.style.opacity = '1';
+    }));
+  })();
+
+  // ── 2. Cursor spotlight no hero ────────────────────────────
+  (function initSpotlight() {
+    const hero   = document.querySelector('.hero');
+    const heroBg = hero && hero.querySelector('.hero-bg');
+    if (!hero || !heroBg) return;
+
+    const spot = document.createElement('div');
+    spot.className = 'hero-spotlight';
+    heroBg.insertBefore(spot, heroBg.firstChild);
+
+    let busy = false;
+    hero.addEventListener('mousemove', e => {
+      if (busy) return;
+      busy = true;
+      requestAnimationFrame(() => {
+        const r = hero.getBoundingClientRect();
+        const x = e.clientX - r.left - 260;
+        const y = e.clientY - r.top  - 260;
+        spot.style.transform = `translate(${x}px, ${y}px)`;
+        spot.style.opacity   = '1';
+        busy = false;
+      });
+    }, { passive: true });
+
+    hero.addEventListener('mouseleave', () => { spot.style.opacity = '0'; });
+  })();
+
+  // ── 3. Canvas: símbolos matemáticos flutuantes ─────────────
+  (function initMathParticles() {
+    const heroBg = document.querySelector('.hero .hero-bg');
+    if (!heroBg) return;
+
+    const canvas = document.createElement('canvas');
+    canvas.className = 'hero-particles-canvas';
+    heroBg.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+
+    const SYMS   = ['π','∑','√','∫','∞','Δ','θ','≈','±','∂','x²','α','β','f(x)','n!','∈'];
+    const COLORS = ['192,132,252', '129,140,248', '56,189,248'];
+    const COUNT  = 26;
+
+    let W = 0, H = 0, ptcls = [];
+
+    function resize() {
+      const hero = heroBg.parentElement;
+      W = canvas.width  = hero.offsetWidth;
+      H = canvas.height = hero.offsetHeight;
+    }
+
+    function mk(spread) {
+      const ml = 240 + Math.random() * 300;
+      return {
+        x:   Math.random() * W,
+        y:   spread ? Math.random() * H : H + 20,
+        sym: SYMS[Math.floor(Math.random() * SYMS.length)],
+        sz:  10 + Math.random() * 14,
+        mA:  0.04 + Math.random() * 0.07,
+        col: COLORS[Math.floor(Math.random() * COLORS.length)],
+        vx:  (Math.random() - 0.5) * 0.2,
+        vy:  -(0.1 + Math.random() * 0.18),
+        li:  spread ? Math.random() * ml : 0,
+        ml
+      };
+    }
+
+    function init() {
+      resize();
+      ptcls = Array.from({ length: COUNT }, () => mk(true));
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      for (let i = 0; i < COUNT; i++) {
+        const p = ptcls[i];
+        p.li++; p.x += p.vx; p.y += p.vy;
+        const t = p.li / p.ml;
+        const a = t < 0.12 ? (t / 0.12) * p.mA
+                : t > 0.82 ? ((1 - t) / 0.18) * p.mA
+                : p.mA;
+        if (a > 0.002) {
+          ctx.save();
+          ctx.globalAlpha = a;
+          ctx.font = `300 ${p.sz}px 'Plus Jakarta Sans',sans-serif`;
+          ctx.fillStyle = `rgb(${p.col})`;
+          ctx.fillText(p.sym, p.x, p.y);
+          ctx.restore();
+        }
+        if (p.li >= p.ml || p.y < -30) ptcls[i] = mk(false);
+      }
+      requestAnimationFrame(draw);
+    }
+
+    init();
+    draw();
+    window.addEventListener('resize', resize, { passive: true });
+  })();
 
 })();

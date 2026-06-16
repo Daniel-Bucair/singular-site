@@ -10,7 +10,7 @@ import os
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-LOTES = ["lote1"]  # adicionar "lote2", "lote3"... conforme forem criados
+LOTES = ["lote1", "lote2", "lote3"]  # adicionar "lote4"... conforme forem criados
 
 CORES = {
     "ok":    "\033[92m",
